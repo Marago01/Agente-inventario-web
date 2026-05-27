@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agente de Inventario Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="sr-only" href="#contenido">Saltar al contenido</a>
+  <header class="topbar">
+    <div>
+      <h1>Agente inteligente de inventario</h1>
+    </div>
+    <button class="theme-toggle" data-theme-toggle aria-label="Cambiar tema">🌙</button>
+  </header>
+
+  <main id="contenido" class="layout">
+    <section class="panel hero-panel">
+      <h2>Panel principal</h2>
+      <p>Este proyecto ya usa integración real con Groq para interpretar solicitudes en lenguaje natural y decidir qué tool ejecutar en el inventario.</p>
+      <div class="stats" id="stats"></div>
+    </section>
+
+    <section class="panel grid-2">
+      <div>
+        <h2>Agente con Groq</h2>
+        <p>Ejemplos: “Registra salida de 2 Arroz Diana 500g”, “Muéstrame productos bajo stock” o “Recomiéndame reabastecimiento y envía correo al proveedor”.</p>
+        <form id="agentForm" class="agent-form">
+          <label for="mensaje">Solicitud en lenguaje natural</label>
+          <textarea id="mensaje" rows="4" placeholder="Ej: ¿Qué debo reponer hoy y envía correo al proveedor?"></textarea>
+          <button type="submit" class="btn btn-primary">Ejecutar agente</button>
+        </form>
+        <div id="agentResponse" class="response-box"></div>
+      </div>
+
+      <div>
+        <h2>Acciones rápidas</h2>
+        <div class="quick-actions">
+          <button class="btn btn-secondary" data-action="load-products">Ver productos</button>
+          <button class="btn btn-secondary" data-action="low-stock">Bajo stock</button>
+          <button class="btn btn-secondary" data-action="restock">Reabastecimiento</button>
+        </div>
+        <form id="searchForm" class="search-form">
+          <label for="search">Buscar producto</label>
+          <input id="search" type="text" placeholder="Nombre o categoría" />
+          <button type="submit" class="btn btn-ghost">Buscar</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>Resultados</h2>
+        <span id="tableTitle" class="badge">Inventario</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Categoría</th>
+              <th>Stock</th>
+              <th>Mínimo</th>
+              <th>Precio</th>
+              <th>Proveedor</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
